@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     //player must have a rigidbody2D and a box colider
     public float moveSpeed = 5f;
+    public GameObject bulletPrefab;
+    public Vector2 yo;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,9 +17,19 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        yo = Input.mousePosition;
+        //Shoot();
         Jump();
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         transform.position += movement * Time.deltaTime * moveSpeed;
+    }
+
+    void Shoot()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(bulletPrefab,gameObject.GetComponent<Transform>().position,gameObject.GetComponent<Transform>().rotation);
+        }
     }
 
     void Jump()
