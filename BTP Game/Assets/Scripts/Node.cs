@@ -19,8 +19,7 @@ public class Node : MonoBehaviour
         startColor = rend.material.color;
     }
 
-    void OnMouseDown ()
-	{
+    void OnMouseDown() {
 		// if (EventSystem.current.IsPointerOverGameObject())
 		// 	return;
 
@@ -40,8 +39,7 @@ public class Node : MonoBehaviour
         }
 	}
 
-    void buildTurret ()
-	{
+    void buildTurret() {
 		// if (PlayerStats.Money < blueprint.cost)
 		// {
 		// 	Debug.Log("Not enough money to build that!");
@@ -63,8 +61,7 @@ public class Node : MonoBehaviour
 		Debug.Log("Turret build!");
 	}
 
-    void OnMouseEnter ()
-	{
+    void OnMouseEnter() {
         Debug.Log("Hover");
 		// if (buildManager.HasMoney) {
 		// 	rend.material.color = hoverColor;
@@ -80,8 +77,7 @@ public class Node : MonoBehaviour
 
 	}
 
-	void OnMouseExit ()
-	{
+	void OnMouseExit() {
 		rend.material.color = startColor;
     }
 }
