@@ -5,7 +5,8 @@ using UnityEngine;
 public class FloorColision : MonoBehaviour
 {
     public bool onfloor = false;
-    public bool temp = false;
+    public int colcount = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,16 +15,21 @@ public class FloorColision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        temp = true; 
+        colcount++; 
     }
     
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        colcount--;    
+    }
+
     void Update()
     {
-        onfloor = false;
-        if (temp)
+        if (colcount > 0)
         {
             onfloor = true;
+        } else {
+            onfloor = false;
         }
-        temp = false;
     }
 }
