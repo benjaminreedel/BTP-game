@@ -10,6 +10,8 @@ public class MapGenerator : MonoBehaviour
     public GameObject mapTile;
     public Node scriptIWant;
 
+    public bool waveUp = false;
+
     [SerializeField] private int mapWidth;
     [SerializeField] private int mapHeight;
 
@@ -85,14 +87,19 @@ public class MapGenerator : MonoBehaviour
     // Generates the Wave, is called by pressing the Call Wave button
     public void generateWave()
     {
-        StartCoroutine("ISpawnEnemies");
-        PlayerStats.Round++;
+        if (waveUp == false)
+        {
+            StartCoroutine("ISpawnEnemies");
+            PlayerStats.Round++;
+        }
+        
+
     }
 
     IEnumerator ISpawnEnemies() {
 
         int rand = Random.Range(1, PlayerStats.Round) + 5;
-
+        waveUp = true;
         for (int i = 0; i < rand; i++) {
 
             Instantiate(BasicEnemy, startTile.transform.position, Quaternion.identity);
@@ -101,6 +108,7 @@ public class MapGenerator : MonoBehaviour
             // Could try to randomize the amount of time between monsters, ie. have a faster wave. 
             yield return new WaitForSeconds(1.5f);
         }
+        waveUp = false;
     }
 
     private void generateMap() {
