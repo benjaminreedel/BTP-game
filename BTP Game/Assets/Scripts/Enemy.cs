@@ -11,7 +11,6 @@ public class Enemy : MonoBehaviour
     private float movementSpeed;
 
 
-    private int killReward; // part of tut
     private int damage;
 
     private GameObject targetTile;
