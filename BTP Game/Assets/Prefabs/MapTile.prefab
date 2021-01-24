@@ -98,8 +98,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startColor: {r: 0.023529414, g: 0.92549026, b: 0.0627451, a: 1}
   hoverColor: {r: 0.023529414, g: 0.4392157, b: 0.0627451, a: 1}
-  notEnoughMoneyColor: {r: 0, g: 0, b: 0, a: 0}
+  notEnoughMoneyColor: {r: 0.2830189, g: 0.035777852, b: 0.035777852, a: 1}
   turret: {fileID: 0}
+  path: 0
   tower: {fileID: 5546282039773558489, guid: 00272eeab93be144dbc303ac5cf9d0a8, type: 3}
 --- !u!61 &6658723068302812414
 BoxCollider2D:

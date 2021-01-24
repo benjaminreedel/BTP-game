@@ -62,15 +62,15 @@ public class Node : MonoBehaviour
 	}
 
     void OnMouseEnter() {
-        Debug.Log("Hover");
 		// if (buildManager.HasMoney) {
 		// 	rend.material.color = hoverColor;
 		// } else {
 		// 	rend.material.color = notEnoughMoneyColor;
 		// }
-        if (!path && PlayerStats.Energy > 10) {
+        if (!path && PlayerStats.Energy >= 10) {
             rend.material.color = hoverColor;
         } else if (!path && PlayerStats.Energy < 10) {
+			Debug.Log("Hover broke");
 			rend.material.color = notEnoughMoneyColor;
 		}
         

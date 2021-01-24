@@ -5,6 +5,8 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
     public GameObject BasicEnemy;
+
+
     public GameObject mapTile;
     public Node scriptIWant;
 
@@ -79,9 +81,26 @@ public class MapGenerator : MonoBehaviour
         currentTile = mapTiles[nextIndex];
     }
 
-    private void generateWave()
+
+    // Generates the Wave, is called by pressing the Call Wave button
+    public void generateWave()
     {
-        Instantiate(BasicEnemy, startTile.transform.position, transform.rotation);
+        StartCoroutine("ISpawnEnemies");
+        PlayerStats.Round++;
+    }
+
+    IEnumerator ISpawnEnemies() {
+
+        int rand = Random.Range(1, PlayerStats.Round) + 5;
+
+        for (int i = 0; i < rand; i++) {
+
+            Instantiate(BasicEnemy, startTile.transform.position, Quaternion.identity);
+
+            // This for-loop waits 2 seconds before the next iteration
+            // Could try to randomize the amount of time between monsters, ie. have a faster wave. 
+            yield return new WaitForSeconds(2f);
+        }
     }
 
     private void generateMap() {
@@ -139,6 +158,5 @@ public class MapGenerator : MonoBehaviour
         startTile.GetComponent<SpriteRenderer>().color = startColor;
         endTile.GetComponent<SpriteRenderer>().color = endColor;
         
-
     }
 }
