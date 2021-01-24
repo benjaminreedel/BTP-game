@@ -48,10 +48,17 @@ public class Node : MonoBehaviour
 		// 	return;
 		// }
 
+
+		if (PlayerStats.Energy < 10) {
+			Debug.Log("Not enough money to build that!");
+			return;
+		}
+
 		// PlayerStats.Money -= blueprint.cost;
 
 		GameObject _turret = (GameObject) Instantiate(tower, transform.position, Quaternion.identity);
 		turret = _turret;
+		PlayerStats.Energy -= 10;
 
 		Debug.Log("Turret build!");
 	}
@@ -64,9 +71,11 @@ public class Node : MonoBehaviour
 		// } else {
 		// 	rend.material.color = notEnoughMoneyColor;
 		// }
-        if (!path) {
+        if (!path && PlayerStats.Energy > 10) {
             rend.material.color = hoverColor;
-        }
+        } else if (!path && PlayerStats.Energy < 10) {
+			rend.material.color = notEnoughMoneyColor;
+		}
         
 
 	}
