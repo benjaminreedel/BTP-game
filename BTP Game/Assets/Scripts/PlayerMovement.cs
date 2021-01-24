@@ -4,39 +4,59 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //player must have a rigidbody2D and a box colider
+    public float yo;
     public float moveSpeed = 5f;
+    public float jumpforce = 5f;
+    public float fallmultiplier = 2.5f;
+    public float lowjumpmultiplier = 2f;
     public GameObject bulletPrefab;
-    public Vector2 yo;
+    Rigidbody2D rb;
+    Transform tf;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        tf = gameObject.GetComponent<Transform>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        yo = Input.mousePosition;
-        //Shoot();
-        Jump();
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
-        transform.position += movement * Time.deltaTime * moveSpeed;
+        yo = rb.velocity.y;
+
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
+        Vector2 dir = new Vector2(x, y);
+
+        jump();
+        walk(dir);
     }
 
     void Shoot()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(bulletPrefab,gameObject.GetComponent<Transform>().position,gameObject.GetComponent<Transform>().rotation);
+            Instantiate(bulletPrefab,tf.position,tf.rotation);
         }
     }
 
-    void Jump()
+    void walk(Vector2 dir)
     {
-        if (Input.GetButtonDown("Jump"))
+        rb.velocity = (new Vector2(dir.x * moveSpeed, rb.velocity.y));
+    }
+
+    void jump()
+    {
+        if (Input.GetButtonDown ("Jump"))
         {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
+            rb.velocity += Vector2.up * jumpforce;
+        }
+
+        if (rb.velocity.y < 10) 
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallmultiplier - 1) * Time.deltaTime;
+        } else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowjumpmultiplier - 1) * Time.deltaTime;
         }
     }
 }
