@@ -41,11 +41,18 @@ public class Tower : MonoBehaviour
             }
         }
 
-        if (distance <= range) {
-            currentTarget = currentNearestEnemy;
-        } else {
-            currentTarget = null;
+        
+        currentTarget = currentNearestEnemy;
+    
+
+        if (Time.time >= nextTimeToShoot) {
+            if (distance <= range) {
+                shoot();
+                nextTimeToShoot = Time.time + cooldown;
+            }
         }
+        
+    
     }
 
     protected virtual void shoot() {
@@ -59,13 +66,6 @@ public class Tower : MonoBehaviour
     void Update()
     {
         updateNearestEnemy();
-
-        if (Time.time >= nextTimeToShoot) {
-            if (currentTarget != null) {
-                shoot();
-                nextTimeToShoot = Time.time + cooldown;
-            }
-        }
-        
     }
+ 
 }

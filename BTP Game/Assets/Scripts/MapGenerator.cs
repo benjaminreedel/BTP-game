@@ -97,9 +97,9 @@ public class MapGenerator : MonoBehaviour
 
             Instantiate(BasicEnemy, startTile.transform.position, Quaternion.identity);
 
-            // This for-loop waits 2 seconds before the next iteration
+            // This for-loop waits 1.5 seconds before the next iteration
             // Could try to randomize the amount of time between monsters, ie. have a faster wave. 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.5f);
         }
     }
 
