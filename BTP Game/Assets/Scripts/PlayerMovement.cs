@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float fallmultiplier = 2.5f;
     public float lowjumpmultiplier = 2f;
     public GameObject bulletPrefab;
+    public FloorColision floorColision;
     Rigidbody2D rb;
     Transform tf;
     // Start is called before the first frame update
@@ -46,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
     void jump()
     {
-        if (Input.GetButtonDown ("Jump"))
+        if (Input.GetButtonDown ("Jump") && floorColision.onfloor)
         {
             rb.velocity += Vector2.up * jumpforce;
         }
