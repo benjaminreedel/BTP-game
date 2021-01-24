@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-
+    public GameObject BasicEnemy;
     public GameObject mapTile;
     public Node scriptIWant;
 
@@ -79,6 +79,11 @@ public class MapGenerator : MonoBehaviour
         currentTile = mapTiles[nextIndex];
     }
 
+    private void generateWave()
+    {
+        Instantiate(BasicEnemy, startTile.transform.position, transform.rotation);
+    }
+
     private void generateMap() {
         for (int y = 0; y < mapHeight; y++) {
             for (int x = 0; x < mapWidth; x++) {
@@ -133,5 +138,7 @@ public class MapGenerator : MonoBehaviour
 
         startTile.GetComponent<SpriteRenderer>().color = startColor;
         endTile.GetComponent<SpriteRenderer>().color = endColor;
+        
+
     }
 }
