@@ -144,5 +144,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b7f6071b0277b40a40a44321c98c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  yo: 0
+  moveSpeed: 10
+  jumpforce: 20
+  fallmultiplier: 3
+  lowjumpmultiplier: 5
   bulletPrefab: {fileID: 5681012155674549828, guid: 327cf3a4699d5844382622bd79d785a2, type: 3}
+  floorColision: {fileID: 0}
