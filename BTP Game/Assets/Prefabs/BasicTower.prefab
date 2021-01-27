@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21fef8b00ee962d4eb18ddf87fb5a338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 5
+  range: 3
   cooldown: 0.6
   currentTarget: {fileID: 0}
   pivot: {fileID: 3212133264988957115}

@@ -100,13 +100,14 @@ public class MapGenerator : MonoBehaviour
 
     IEnumerator ISpawnEnemies() {
 
-        int rand = Random.Range(1, PlayerStats.Round) + 5 + PlayerStats.Round;
+        int rand = Random.Range(1, PlayerStats.Round) + 1 + PlayerStats.Round;
         waveUp = true;
         for (int i = 0; i < rand; i++) {
 
             GameObject e = Instantiate(BasicEnemy, startTile.transform.position, Quaternion.identity);
             enemyScript = e.GetComponent<Enemy>();
             enemyScript.movementSpeed += (0.2f * PlayerStats.Round);
+            enemyScript.enemyHealth += (1 * PlayerStats.Round);
             
             yield return new WaitForSeconds(1.5f - (0.1f * PlayerStats.Round));
         }

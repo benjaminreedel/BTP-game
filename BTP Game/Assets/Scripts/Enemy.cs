@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    private float enemyHealth;
+    public float enemyHealth;
 
     [SerializeField]
     public float movementSpeed;
@@ -40,6 +40,8 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "Bullet") {
             takeDamage(5);
+        } else if (other.gameObject.tag == "SniperBullet") {
+            takeDamage(1000);
         }
     }
 
@@ -72,7 +74,7 @@ public class Enemy : MonoBehaviour
         if (transform.position == MapGenerator.endTile.transform.position) {
             PlayerStats.Energy -= damage;
             if (PlayerStats.Energy < 0) {
-                SceneManager.LoadScene("GameOver)");
+                SceneManager.LoadScene("GameOver");
             }
             die();
         }
