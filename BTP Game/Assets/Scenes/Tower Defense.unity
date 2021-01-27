@@ -431,12 +431,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BasicEnemy: {fileID: 8237074914249118899, guid: ac004d0be30745747b2cbfe66f88a9b5, type: 3}
   mapTile: {fileID: 2475608176230900680, guid: 2f2079f49a9d54e4884027be2ac9b70a, type: 3}
-  scriptIWant: {fileID: 0}
+  nodeScript: {fileID: 0}
+  enemyScript: {fileID: 0}
+  waveUp: 0
   mapWidth: 8
   mapHeight: 8
   pathColor: {r: 0.4528302, g: 0.42933428, b: 0.42933428, a: 1}
   startColor: {r: 0.5281684, g: 0.7830189, b: 0.53020716, a: 1}
   endColor: {r: 0.8962264, g: 0.038047332, b: 0.038047332, a: 1}
+  blockedColor: {r: 1, g: 0.4621824, b: 0, a: 1}
 --- !u!4 &1083398541
 Transform:
   m_ObjectHideFlags: 0

@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: 40
   movementSpeed: 1
+  damage: 5
 --- !u!61 &6599997705019921204
 BoxCollider2D:
   m_ObjectHideFlags: 0

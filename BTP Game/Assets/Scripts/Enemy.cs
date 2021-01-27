@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -8,9 +9,9 @@ public class Enemy : MonoBehaviour
     private float enemyHealth;
 
     [SerializeField]
-    private float movementSpeed;
+    public float movementSpeed;
 
-
+    [SerializeField]
     private int damage;
 
     private GameObject targetTile;
@@ -30,6 +31,7 @@ public class Enemy : MonoBehaviour
     public void takeDamage(float amount) {
         enemyHealth -= amount;
         if (enemyHealth <= 0) {
+            PlayerStats.Energy += 1;
             die();
         }
 
@@ -67,6 +69,13 @@ public class Enemy : MonoBehaviour
     private void Update() {
         checkPosition();
         moveEnemy();
+        if (transform.position == MapGenerator.endTile.transform.position) {
+            PlayerStats.Energy -= damage;
+            if (PlayerStats.Energy < 0) {
+                SceneManager.LoadScene("GameOver)");
+            }
+            die();
+        }
     }
 
 }

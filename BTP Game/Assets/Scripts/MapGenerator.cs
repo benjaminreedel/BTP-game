@@ -8,7 +8,8 @@ public class MapGenerator : MonoBehaviour
 
 
     public GameObject mapTile;
-    public Node scriptIWant;
+    public Node nodeScript;
+    public Enemy enemyScript;
 
     public bool waveUp = false;
 
@@ -30,6 +31,7 @@ public class MapGenerator : MonoBehaviour
     public Color pathColor;
     public Color startColor;
     public Color endColor;
+    public Color blockedColor;
 
     private void Start() {
         generateMap();
@@ -57,8 +59,8 @@ public class MapGenerator : MonoBehaviour
     }
 
     private void moveDown() {
-        scriptIWant = currentTile.GetComponent<Node>();
-        scriptIWant.path = true;
+        nodeScript = currentTile.GetComponent<Node>();
+        nodeScript.path = true;
         pathTiles.Add(currentTile);
         currentIndex = mapTiles.IndexOf(currentTile);
         nextIndex = currentIndex - mapWidth;
@@ -66,8 +68,8 @@ public class MapGenerator : MonoBehaviour
     }
 
     private void moveLeft() {
-        scriptIWant = currentTile.GetComponent<Node>();
-        scriptIWant.path = true;
+        nodeScript = currentTile.GetComponent<Node>();
+        nodeScript.path = true;
         pathTiles.Add(currentTile);
         currentIndex = mapTiles.IndexOf(currentTile);
         nextIndex = currentIndex-1;
@@ -75,8 +77,8 @@ public class MapGenerator : MonoBehaviour
     }
 
     private void moveRight() {
-        scriptIWant = currentTile.GetComponent<Node>();
-        scriptIWant.path = true;
+        nodeScript = currentTile.GetComponent<Node>();
+        nodeScript.path = true;
         pathTiles.Add(currentTile);
         currentIndex = mapTiles.IndexOf(currentTile);
         nextIndex = currentIndex+1;
@@ -98,15 +100,15 @@ public class MapGenerator : MonoBehaviour
 
     IEnumerator ISpawnEnemies() {
 
-        int rand = Random.Range(1, PlayerStats.Round) + 5;
+        int rand = Random.Range(1, PlayerStats.Round) + 5 + PlayerStats.Round;
         waveUp = true;
         for (int i = 0; i < rand; i++) {
 
-            Instantiate(BasicEnemy, startTile.transform.position, Quaternion.identity);
-
-            // This for-loop waits 1.5 seconds before the next iteration
-            // Could try to randomize the amount of time between monsters, ie. have a faster wave. 
-            yield return new WaitForSeconds(1.5f);
+            GameObject e = Instantiate(BasicEnemy, startTile.transform.position, Quaternion.identity);
+            enemyScript = e.GetComponent<Enemy>();
+            enemyScript.movementSpeed += (0.2f * PlayerStats.Round);
+            
+            yield return new WaitForSeconds(1.5f - (0.1f * PlayerStats.Round));
         }
         waveUp = false;
     }
@@ -126,7 +128,12 @@ public class MapGenerator : MonoBehaviour
         List<GameObject> bottomEdgeTiles = getBottomEdgeTiles();
 
         int rand1 = Random.Range(0, mapWidth);
-        int rand2 = Random.Range(0, mapWidth);
+        int rand2;
+        if (rand1 - 3 > 0) {
+            rand2 = (rand1 - 3);
+        } else {
+            rand2 = (rand1 + 3);
+        }
 
         startTile = topEdgeTiles[rand1];
         endTile = bottomEdgeTiles[rand2];
@@ -134,6 +141,25 @@ public class MapGenerator : MonoBehaviour
         currentTile = startTile;
 
         moveDown();
+
+        while (!reachedX && !reachedY) {
+            int rand = Random.Range(0, 2);
+            if (rand == 1) {
+                if (currentTile.transform.position.x > endTile.transform.position.x) {
+                    moveLeft();
+                } else if (currentTile.transform.position.x < endTile.transform.position.x) {
+                    moveRight();
+                } else {
+                    reachedX = true;
+                }
+            } else {
+                if (currentTile.transform.position.y > endTile.transform.position.y) {
+                    moveDown();
+                } else {
+                    reachedY = true;
+            }
+            }
+        }
 
         while (!reachedX) {
 
@@ -154,12 +180,20 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        scriptIWant = endTile.GetComponent<Node>();
-        scriptIWant.path = true;
+        nodeScript = endTile.GetComponent<Node>();
+        nodeScript.path = true;
         pathTiles.Add(endTile);
 
-        foreach (GameObject tile in pathTiles)
-        {
+        foreach (GameObject tile in mapTiles) {
+            int rand = Random.Range(0, 11);
+            if (rand == 1) {
+                tile.GetComponent<SpriteRenderer>().color = blockedColor;
+                nodeScript = tile.GetComponent<Node>();
+                nodeScript.path = true;
+            }
+        }
+
+        foreach (GameObject tile in pathTiles) {
            tile.GetComponent<SpriteRenderer>().color = pathColor;
         }
 
