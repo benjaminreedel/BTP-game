@@ -30,6 +30,16 @@ public class PlayerMovement : MonoBehaviour
         //Which is overwriten by setting the variables again benith 
         //rb.velocity = (new Vector2(0, rb.velocity.y));
         rb.gravityScale = 4;
+        if (rb.velocity.x > 0)
+        {
+            rb.velocity -= (new Vector2(0.5f, 0.5f));
+        }
+
+        if (rb.velocity.x < 0)
+        {
+            rb.velocity += (new Vector2(0.5f, 0.5f));
+        }
+        
 
         //Debuging Variable
         yo = rb.velocity.y;
@@ -54,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //This add the wall slide and slow decent
             rb.gravityScale = 0;
-            rb.velocity = (new Vector2(rb.velocity.x, wallspeed));
+            rb.velocity += (new Vector2(0, wallspeed));
         }
     }
 
@@ -69,7 +79,10 @@ public class PlayerMovement : MonoBehaviour
     void walk(Vector2 dir)
     {
         //set the character velocity depefing the the value of the x varible times the speed
-        rb.velocity = (new Vector2(dir.x * moveSpeed, rb.velocity.y));
+        if (rb.velocity.x < moveSpeed)
+        {
+            rb.velocity += (new Vector2(dir.x * moveSpeed, 0));
+        }
     }
 
     void jump()
