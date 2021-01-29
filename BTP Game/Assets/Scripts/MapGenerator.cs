@@ -96,8 +96,8 @@ public class MapGenerator : MonoBehaviour
     {
         if (waveUp == false)
         {
-            StartCoroutine("ISpawnEnemies");
             PlayerStats.Round++;
+            StartCoroutine("ISpawnEnemies");
         }
         
 
@@ -112,9 +112,13 @@ public class MapGenerator : MonoBehaviour
             GameObject e = Instantiate(BasicEnemy, startTile.transform.position, Quaternion.identity);
             enemyScript = e.GetComponent<Enemy>();
             enemyScript.movementSpeed += (0.2f * PlayerStats.Round);
-            enemyScript.enemyHealth += (1 * PlayerStats.Round);
+            enemyScript.enemyHealth += (PlayerStats.Round);
             
-            yield return new WaitForSeconds(1.5f - (0.1f * PlayerStats.Round));
+            if (PlayerStats.Round < 10) {
+                yield return new WaitForSeconds(1.5f - (0.1f * PlayerStats.Round));
+            } else {
+                yield return new WaitForSeconds(.4f - (0.01f * PlayerStats.Round));
+            }
         }
         waveUp = false;
     }

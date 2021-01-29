@@ -50,6 +50,26 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2848569955821890076, guid: 00272eeab93be144dbc303ac5cf9d0a8, type: 3}
+      propertyPath: Pan2D
+      value: -0.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848569955821890076, guid: 00272eeab93be144dbc303ac5cf9d0a8, type: 3}
+      propertyPath: m_Pitch
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848569955821890076, guid: 00272eeab93be144dbc303ac5cf9d0a8, type: 3}
+      propertyPath: m_Volume
+      value: 0.447
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848569955821890076, guid: 00272eeab93be144dbc303ac5cf9d0a8, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848569955821890076, guid: 00272eeab93be144dbc303ac5cf9d0a8, type: 3}
+      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].value
+      value: 0.342
+      objectReference: {fileID: 0}
     - target: {fileID: 3362886680510927385, guid: 00272eeab93be144dbc303ac5cf9d0a8, type: 3}
       propertyPath: m_Sprite
       value: 

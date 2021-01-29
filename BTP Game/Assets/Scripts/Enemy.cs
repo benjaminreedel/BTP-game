@@ -31,7 +31,15 @@ public class Enemy : MonoBehaviour
     public void takeDamage(float amount) {
         enemyHealth -= amount;
         if (enemyHealth <= 0) {
-            PlayerStats.Energy += 1;
+            if (PlayerStats.Energy < 100) {
+                PlayerStats.Energy += 1;
+            }
+            int scoreCalc = (int) (100 / PlayerStats.Energy / 0.01) * PlayerStats.Round;
+            if (scoreCalc > 1) {
+                PlayerStats.Score += scoreCalc;
+            } else {
+                PlayerStats.Score += 1; 
+            }
             die();
         }
 
@@ -39,11 +47,11 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "Bullet") {
-            takeDamage(5);
+            takeDamage(10);
         } else if (other.gameObject.tag == "SniperBullet") {
             takeDamage(1000);
         } else if (other.gameObject.tag == "RollerBullet") {
-            takeDamage(30);
+            takeDamage(35);
         }
     }
 
@@ -54,6 +62,14 @@ public class Enemy : MonoBehaviour
 
     private void moveEnemy() {
         transform.position = Vector3.MoveTowards(transform.position, targetTile.transform.position, movementSpeed * Time.deltaTime);
+
+        if (transform.position.y > targetTile.transform.position.y) {
+            transform.localRotation = Quaternion.Euler(0,0,0);
+        } else if (transform.position.x > targetTile.transform.position.x) {
+            transform.localRotation = Quaternion.Euler(0,0,-90);
+        } else if (transform.position.x < targetTile.transform.position.x) {
+            transform.localRotation = Quaternion.Euler(0,0,90);
+        }
     }
 
     private void checkPosition() {
@@ -64,11 +80,14 @@ public class Enemy : MonoBehaviour
 
             if (distance < 0.001f) {
                 int currentIndex = MapGenerator.pathTiles.IndexOf(targetTile);
-
                 targetTile = MapGenerator.pathTiles[currentIndex + 1];
+
+                
+
             }
         }
     }
+    
 
     private void Update() {
         checkPosition();
