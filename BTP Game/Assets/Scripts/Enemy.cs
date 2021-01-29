@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
     public void takeDamage(float amount) {
         enemyHealth -= amount;
         if (enemyHealth <= 0) {
-            if (PlayerStats.Energy < 100) {
+            if (PlayerStats.Energy < 200) {
                 PlayerStats.Energy += 1;
             }
             int scoreCalc = (int) (100 / PlayerStats.Energy / 0.01) * PlayerStats.Round;

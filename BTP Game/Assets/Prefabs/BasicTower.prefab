@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 3
-  cooldown: 0.6
+  cooldown: 0.4
   currentTarget: {fileID: 0}
   pivot: {fileID: 3212133264988957115}
   barrel: {fileID: 92569932056365897}

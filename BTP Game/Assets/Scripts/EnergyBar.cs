@@ -18,6 +18,6 @@ public class EnergyBar : MonoBehaviour
     }
 
     private void Update() {
-        setSize((float) PlayerStats.Energy / 100f);
+        setSize((float) PlayerStats.Energy / 200f);
     }
 }
