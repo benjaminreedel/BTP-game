@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        gameObject.GetComponent<SpriteRenderer>().color = Color.Lerp(gameObject.GetComponent<SpriteRenderer>().color, Color.white, Mathf.PingPong(Time.time, 0.2f));
         if (Time.time >= timetouse)
         {
             PlayerStats.Energy -= 1;
@@ -84,7 +85,8 @@ public class PlayerMovement : MonoBehaviour
 
     public int playerhit(int vulntime)
     {
-        
+        Debug.Log("hit");
+        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         return 0;
         
     }

@@ -24,6 +24,7 @@ public class enemybullet : MonoBehaviour
         
         if (other.gameObject.name == "Square")
         {
+            other.gameObject.GetComponent<PlayerMovement>().playerhit(2);
             Destroy(gameObject);
             PlayerStats.Energy -= 5;
         }

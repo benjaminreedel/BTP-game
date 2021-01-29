@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4564974302505177245}
   - component: {fileID: 4564974302505177218}
   m_Layer: 0
-  m_Name: Static Sprite (3)
+  m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
