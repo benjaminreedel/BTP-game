@@ -9,7 +9,7 @@ public class NextLevel : MonoBehaviour
     {
         if (other.gameObject.name == "Square")
         {
-            SceneManager.LoadScene("Tower Defence");
+            SceneManager.LoadScene(3);
         }
     }
 }

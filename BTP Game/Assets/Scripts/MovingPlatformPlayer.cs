@@ -37,7 +37,7 @@ public class MovingPlatformPlayer : MonoBehaviour
         if (other.gameObject.name == "Square")
         {
             other.collider.transform.SetParent(null);
-            playeron = false;
+            //playeron = false;
         }
     }
 
