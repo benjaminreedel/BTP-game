@@ -23,6 +23,20 @@ public class MovingPlatform : MonoBehaviour
         move();
     }
 
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.name == "Square")
+        {
+            other.collider.transform.SetParent(transform);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other) {
+        if (other.gameObject.name == "Square")
+        {
+            other.collider.transform.SetParent(null);
+        }
+    }
+
     void move()
     {
         
