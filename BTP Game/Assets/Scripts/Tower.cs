@@ -48,7 +48,11 @@ public class Tower : MonoBehaviour
         if (Time.time >= nextTimeToShoot) {
             if (distance <= range) {
                 shoot();
-                nextTimeToShoot = Time.time + cooldown;
+                float rand = Random.Range(0, 1f);
+                if (this.gameObject.tag == "Bullet") {
+                    rand = 0;
+                }
+                nextTimeToShoot = Time.time + cooldown + rand;
             }
         }
         

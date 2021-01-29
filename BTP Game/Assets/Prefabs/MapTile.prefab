@@ -73,12 +73,12 @@ SpriteRenderer:
   m_SortingLayerID: -400626883
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: e6aac5ae4a5b3f14695ab9eb8005c492, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c6278e4d943d4e54dabd072eab56c0af, type: 3}
   m_Color: {r: 0.02180491, g: 0.9245283, b: 0.06400643, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.96, y: 3.1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -96,9 +96,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe550fdb08c8694f96ece5393617804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startColor: {r: 0.023529414, g: 0.92549026, b: 0.0627451, a: 1}
+  startSprite: {fileID: 0}
   hoverColor: {r: 0.023529414, g: 0.4392157, b: 0.0627451, a: 1}
+  noColor: {r: 1, g: 1, b: 1, a: 1}
+  startColor: {r: 1, g: 1, b: 1, a: 1}
   notEnoughMoneyColor: {r: 0.2830189, g: 0.035777852, b: 0.035777852, a: 1}
+  buildSprite: {fileID: 21300000, guid: 60df4662b7554f6449675a1a8ff781a2, type: 3}
+  endSprite: {fileID: 21300000, guid: ef588fb802a9cf14ab88c59f7b5b67b6, type: 3}
   turret: {fileID: 0}
   path: 0
   tower: {fileID: 5546282039773558489, guid: 00272eeab93be144dbc303ac5cf9d0a8, type: 3}
@@ -120,7 +124,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 2.96, y: 3.1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0

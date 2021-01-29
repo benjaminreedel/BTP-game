@@ -12,9 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Options.unity
     guid: 1c977fda31e08094494d8b190d9ce5b8
   - enabled: 1
+    path: Assets/Scenes/PlatformerLevel.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
     path: Assets/Scenes/Tower Defense.unity
     guid: 86b38cf5cc97ced48bcdb86a86e75eab
   - enabled: 1
-    path: Assets/Scenes/PlatformerLevel.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/GameOver.unity
+    guid: bc54ec35f6fd4ed41a17278a65972712
   m_configObjects: {}

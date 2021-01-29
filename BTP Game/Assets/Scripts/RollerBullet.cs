@@ -2,16 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class RollerBullet : MonoBehaviour
 {
 
     public float speed;
-
-    private void OnTriggerEnter2D(Collider2D other) {
-       if (other.gameObject.tag == "Enemy") {
-            Destroy(gameObject);
-       }
-    }
 
     // Start is called before the first frame update
     void Start()

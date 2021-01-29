@@ -6,7 +6,6 @@ public class MapGenerator : MonoBehaviour
 {
     public GameObject BasicEnemy;
 
-
     public GameObject mapTile;
     public Node nodeScript;
     public Enemy enemyScript;
@@ -30,8 +29,14 @@ public class MapGenerator : MonoBehaviour
 
     public Color pathColor;
     public Color startColor;
-    public Color endColor;
+    public Color noColor;
     public Color blockedColor;
+
+    public Sprite pathSprite;
+    public Sprite endSprite;
+    public Sprite blockedSprite;
+    public Sprite startSprite;
+
 
     private void Start() {
         generateMap();
@@ -91,8 +96,8 @@ public class MapGenerator : MonoBehaviour
     {
         if (waveUp == false)
         {
-            StartCoroutine("ISpawnEnemies");
             PlayerStats.Round++;
+            StartCoroutine("ISpawnEnemies");
         }
         
 
@@ -100,15 +105,20 @@ public class MapGenerator : MonoBehaviour
 
     IEnumerator ISpawnEnemies() {
 
-        int rand = Random.Range(1, PlayerStats.Round) + 5 + PlayerStats.Round;
+        int rand = Random.Range(1, PlayerStats.Round) + 1 + PlayerStats.Round;
         waveUp = true;
         for (int i = 0; i < rand; i++) {
 
             GameObject e = Instantiate(BasicEnemy, startTile.transform.position, Quaternion.identity);
             enemyScript = e.GetComponent<Enemy>();
             enemyScript.movementSpeed += (0.2f * PlayerStats.Round);
+            enemyScript.enemyHealth += (PlayerStats.Round);
             
-            yield return new WaitForSeconds(1.5f - (0.1f * PlayerStats.Round));
+            if (PlayerStats.Round < 10) {
+                yield return new WaitForSeconds(1.5f - (0.1f * PlayerStats.Round));
+            } else {
+                yield return new WaitForSeconds(.4f - (0.01f * PlayerStats.Round));
+            }
         }
         waveUp = false;
     }
@@ -185,20 +195,24 @@ public class MapGenerator : MonoBehaviour
         pathTiles.Add(endTile);
 
         foreach (GameObject tile in mapTiles) {
-            int rand = Random.Range(0, 11);
+            int rand = Random.Range(0, 3);
             if (rand == 1) {
-                tile.GetComponent<SpriteRenderer>().color = blockedColor;
+                tile.GetComponent<SpriteRenderer>().sprite = blockedSprite;
+                tile.GetComponent<SpriteRenderer>().color = noColor;
                 nodeScript = tile.GetComponent<Node>();
                 nodeScript.path = true;
             }
         }
 
         foreach (GameObject tile in pathTiles) {
-           tile.GetComponent<SpriteRenderer>().color = pathColor;
+            tile.GetComponent<SpriteRenderer>().sprite = startSprite;
+            tile.GetComponent<SpriteRenderer>().color = pathColor;
         }
 
-        startTile.GetComponent<SpriteRenderer>().color = startColor;
-        endTile.GetComponent<SpriteRenderer>().color = endColor;
+        startTile.GetComponent<SpriteRenderer>().sprite = endSprite;
+        startTile.GetComponent<SpriteRenderer>().color = noColor;
+        endTile.GetComponent<SpriteRenderer>().sprite = endSprite;
+        endTile.GetComponent<SpriteRenderer>().color = noColor;
         
     }
 }
