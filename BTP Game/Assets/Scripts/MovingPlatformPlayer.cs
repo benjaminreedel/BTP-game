@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour
+public class MovingPlatformPlayer : MonoBehaviour
 {
     Vector3 startpos;
     public Vector3 emir;
@@ -10,6 +10,7 @@ public class MovingPlatform : MonoBehaviour
     public bool down = true;
     Rigidbody2D rb;
     public float speed;
+    private bool playeron = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +21,14 @@ public class MovingPlatform : MonoBehaviour
     void Update()
     {
         emir = startpos + targetpos;
+        if(playeron)
         move();
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.name == "Square")
         {
+            playeron = true;
             other.collider.transform.SetParent(transform);
         }
     }
@@ -34,6 +37,7 @@ public class MovingPlatform : MonoBehaviour
         if (other.gameObject.name == "Square")
         {
             other.collider.transform.SetParent(null);
+            playeron = false;
         }
     }
 
