@@ -39,6 +39,12 @@ public class MapGenerator : MonoBehaviour
 
 
     private void Start() {
+        deleteMap();
+        reachedX = false;
+        reachedY = false;
+        mapTiles = new List<GameObject>();
+        pathTiles = new List<GameObject>();
+        waveUp = false;
         generateMap();
     }
 
@@ -121,6 +127,12 @@ public class MapGenerator : MonoBehaviour
             }
         }
         waveUp = false;
+    }
+
+    public void deleteMap() {
+        foreach (GameObject tile in mapTiles) {
+            Destroy(tile);
+        }
     }
 
     private void generateMap() {

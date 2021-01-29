@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public void play() {
         SceneManager.LoadScene(2);
+        PlayerStats.Energy = 300;
     }
 
     public void options() {
