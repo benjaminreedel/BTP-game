@@ -6,17 +6,23 @@ public class Node : MonoBehaviour
 {
     private Renderer rend;
 
-    public Color startColor;
+    public Sprite startSprite;
     public Color hoverColor;
+	public Color noColor;
+	public Color startColor;
     public Color notEnoughMoneyColor;
 
+	public Sprite buildSprite;
+	public Sprite endSprite;
+
     public GameObject turret;
+	public GameObject tower;
+
     public bool path = false;
-    public GameObject tower;
 
     private void Start() {
-        rend = GetComponent<Renderer>();
-        startColor = rend.material.color;
+        startSprite = this.GetComponent<SpriteRenderer>().sprite;
+		startColor = this.GetComponent<SpriteRenderer>().color;
     }
 
     void OnMouseDown() {
@@ -47,18 +53,21 @@ public class Node : MonoBehaviour
 		// }
 
 
-		if (PlayerStats.Energy < 10) {
+		if (PlayerStats.Energy < BuildManager.towerCost) {
 			Debug.Log("Not enough money to build that!");
+			gameObject.GetComponent<SpriteRenderer>().color = hoverColor;
+			gameObject.GetComponent<SpriteRenderer>().color = noColor;
 			return;
 		}
 
 		// PlayerStats.Money -= blueprint.cost;
-
-		GameObject _turret = (GameObject) Instantiate(tower, transform.position, Quaternion.identity);
-		turret = _turret;
-		PlayerStats.Energy -= 10;
-
-		Debug.Log("Turret build!");
+		tower = BuildManager.currentTower;
+		turret = (GameObject) Instantiate(tower, transform.position, Quaternion.identity);
+		gameObject.GetComponent<SpriteRenderer>().sprite = buildSprite;
+		gameObject.GetComponent<SpriteRenderer>().color = noColor;
+		startSprite = buildSprite;
+		path = true;
+		PlayerStats.Energy -= BuildManager.towerCost;
 	}
 
     void OnMouseEnter() {
@@ -67,17 +76,22 @@ public class Node : MonoBehaviour
 		// } else {
 		// 	rend.material.color = notEnoughMoneyColor;
 		// }
-        if (!path && PlayerStats.Energy >= 10) {
-            rend.material.color = hoverColor;
-        } else if (!path && PlayerStats.Energy < 10) {
-			Debug.Log("Hover broke");
-			rend.material.color = notEnoughMoneyColor;
+        if (!path && PlayerStats.Energy >= BuildManager.towerCost) {
+            //gameObject.GetComponent<SpriteRenderer>().sprite = buildSprite;
+			gameObject.GetComponent<SpriteRenderer>().color = hoverColor;
+        } else if (!path && PlayerStats.Energy < BuildManager.towerCost) {
+			gameObject.GetComponent<SpriteRenderer>().sprite = endSprite;
+			gameObject.GetComponent<SpriteRenderer>().color = noColor;
 		}
         
 
 	}
 
 	void OnMouseExit() {
-		rend.material.color = startColor;
+		//gameObject.GetComponent<SpriteRenderer>().sprite = startSprite;
+		if (turret == null) {
+			gameObject.GetComponent<SpriteRenderer>().sprite = startSprite;
+			gameObject.GetComponent<SpriteRenderer>().color = startColor;
+		}
     }
 }

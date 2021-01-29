@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - wall
   - SniperBullet
+  - RollerBullet
   layers:
   - Default
   - TransparentFX

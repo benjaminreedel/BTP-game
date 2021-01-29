@@ -6,7 +6,6 @@ public class MapGenerator : MonoBehaviour
 {
     public GameObject BasicEnemy;
 
-
     public GameObject mapTile;
     public Node nodeScript;
     public Enemy enemyScript;
@@ -30,8 +29,14 @@ public class MapGenerator : MonoBehaviour
 
     public Color pathColor;
     public Color startColor;
-    public Color endColor;
+    public Color noColor;
     public Color blockedColor;
+
+    public Sprite pathSprite;
+    public Sprite endSprite;
+    public Sprite blockedSprite;
+    public Sprite startSprite;
+
 
     private void Start() {
         generateMap();
@@ -186,20 +191,24 @@ public class MapGenerator : MonoBehaviour
         pathTiles.Add(endTile);
 
         foreach (GameObject tile in mapTiles) {
-            int rand = Random.Range(0, 11);
+            int rand = Random.Range(0, 3);
             if (rand == 1) {
-                tile.GetComponent<SpriteRenderer>().color = blockedColor;
+                tile.GetComponent<SpriteRenderer>().sprite = blockedSprite;
+                tile.GetComponent<SpriteRenderer>().color = noColor;
                 nodeScript = tile.GetComponent<Node>();
                 nodeScript.path = true;
             }
         }
 
         foreach (GameObject tile in pathTiles) {
-           tile.GetComponent<SpriteRenderer>().color = pathColor;
+            tile.GetComponent<SpriteRenderer>().sprite = startSprite;
+            tile.GetComponent<SpriteRenderer>().color = pathColor;
         }
 
-        startTile.GetComponent<SpriteRenderer>().color = startColor;
-        endTile.GetComponent<SpriteRenderer>().color = endColor;
+        startTile.GetComponent<SpriteRenderer>().sprite = endSprite;
+        startTile.GetComponent<SpriteRenderer>().color = noColor;
+        endTile.GetComponent<SpriteRenderer>().sprite = endSprite;
+        endTile.GetComponent<SpriteRenderer>().color = noColor;
         
     }
 }

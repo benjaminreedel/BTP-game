@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SniperTower : Tower
+public class RollerTower : Tower
 {
     public Transform pivot;
     public Transform barrel;

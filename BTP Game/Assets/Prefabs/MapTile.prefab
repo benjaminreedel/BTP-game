@@ -96,9 +96,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe550fdb08c8694f96ece5393617804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startColor: {r: 0.023529414, g: 0.92549026, b: 0.0627451, a: 1}
+  startSprite: {fileID: 0}
   hoverColor: {r: 0.023529414, g: 0.4392157, b: 0.0627451, a: 1}
+  noColor: {r: 1, g: 1, b: 1, a: 1}
+  startColor: {r: 1, g: 1, b: 1, a: 1}
   notEnoughMoneyColor: {r: 0.2830189, g: 0.035777852, b: 0.035777852, a: 1}
+  buildSprite: {fileID: 21300000, guid: 60df4662b7554f6449675a1a8ff781a2, type: 3}
+  endSprite: {fileID: 21300000, guid: ef588fb802a9cf14ab88c59f7b5b67b6, type: 3}
   turret: {fileID: 0}
   path: 0
   tower: {fileID: 5546282039773558489, guid: 00272eeab93be144dbc303ac5cf9d0a8, type: 3}

@@ -42,6 +42,8 @@ public class Enemy : MonoBehaviour
             takeDamage(5);
         } else if (other.gameObject.tag == "SniperBullet") {
             takeDamage(1000);
+        } else if (other.gameObject.tag == "RollerBullet") {
+            takeDamage(30);
         }
     }
 
